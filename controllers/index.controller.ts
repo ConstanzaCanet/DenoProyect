@@ -38,4 +38,17 @@ export const saveUser = async({request,response}:{request:Request,response:Respo
         status:"success,nuevo usuarioooo",
         value:value
     }
+};
+
+
+export const deleteUser = async (context:Context)=>{
+    const{id} = helpers.getQuery(context,{mergeParams:true});
+    const deleteUser = await userCollection.deleteOne({_id: id});
+    if(!deleteUser) return context.response.body ={status:'error, user not found'}
+    context.response.body = {
+        status:"hasta la vista baby",
+        payload:deleteUser
+    }
+
 }
+
